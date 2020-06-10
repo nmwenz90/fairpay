@@ -204,7 +204,10 @@ fairpayController.getAgeStats = (req, res, next) => {
 // middleware gets avg gender stats of current user's company
 fairpayController.getGenderStats = (req, res, next) => {
   const { linkedin_id, job_title } = res.locals.currentUser;
-  const queryString = `select u.gender, round(avg(s.base_salary), 0) as avg_salary, round(avg(s.annual_bonus), 0) as avg_bonus, round(avg(s.stock_options), 0) as avg_stock_options, count(*) from salary s left join users u on s._id = u.salary left join company c on c._id = s.company_id where c.linkedin_id = '${linkedin_id}' and s.job_title = '${job_title}' and s.active = 'true' group by u.gender order by u.gender`;
+  const queryString = `select u.gender,
+   round(avg(s.base_salary), 0) as avg_salary,
+    round(avg(s.annual_bonus), 0) as avg_bonus, round(avg(s.stock_options),
+     0) as avg_stock_options, count(*) from salary s left join users u on s._id = u.salary left join company c on c._id = s.company_id where c.linkedin_id = '${linkedin_id}' and s.job_title = '${job_title}' and s.active = 'true' group by u.gender order by u.gender`;
   db.query(queryString, (err, response) => {
     if (err) {
       return next({
@@ -220,5 +223,8 @@ fairpayController.getGenderStats = (req, res, next) => {
     return next();
   });
 };
+
+//Middleware gets regional stats of current users company
+
 
 module.exports = fairpayController;
