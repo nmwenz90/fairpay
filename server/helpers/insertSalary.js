@@ -28,24 +28,24 @@ insertSalary.insert = (req, res, companyKey) => {
       base_salary, annual_bonus, stock_options, signing_bonus, full_time_status,
       active];
 
-    const salaryQuery = async () => {
-      try {
-        const query = await db.query(queryString, params)
-        const response = await query.rows[0].key
-        return response
-      }
-      catch (err) {
-        console.log('error in salaryQuery function')
-      }
-      finally {
-        console.log('salaryQuery has run')
-      }
-    }
-    salaryQuery()
+    // const salaryQuery = async () => {
+    //   try {
+    //     const query = await db.query(queryString, params)
+    //     const response = await query.rows[0].key
+    //     return response
+    //   }
+    //   catch (err) {
+    //     console.log('error in salaryQuery function')
+    //   }
+    //   finally {
+    //     console.log('salaryQuery has run')
+    //   }
+    // }
+    // salaryQuery()
 
-    // return db.query(queryString, params)
-    // .then(response =>  response.rows[0].key)
-    // .catch ((err) => console.log('Error in query for creating new salary entry: ', err));
+    return db.query(queryString, params)
+      .then(response => response.rows[0].key)
+      .catch((err) => console.log('Error in query for creating new salary entry: ', err));
   }
 }
 
