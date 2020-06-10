@@ -201,7 +201,7 @@ function Home(props) {
 
         // after finishing this execution, set loading to false
         setLoading(false);
-      });
+      }).catch(err => console.log(err));
   }, []);
 
   const { classes } = props;
@@ -230,64 +230,64 @@ function Home(props) {
       {loading ? (
         <h2 className="current_user_header">Loading Data...</h2>
       ) : (
-        <div>
-          <div id="tables_div">
-            <Container>
-              <CompanyComparison
-                view={view}
-                index={0}
-                name={name}
-                company={company}
-                jobTitle={jobTitle}
-                sexuality={sexuality}
-                age={age}
-                gender={gender}
-                race={race}
-                employeeType={employeeType}
-                yrsExperience={yrsExperience}
-                yrsCompany={yrsCompany}
-                baseSalary={baseSalary}
-                annualBonus={annualBonus}
-                stockOptions={stockOptions}
-                signingBonus={signingBonus}
-                ftStatus={ftStatus}
-                raceList={raceList}
-                genderList={genderList}
-                ageList={ageList}
-                aggregateList={aggregateList}
-                allNames={allNames}
-              />
-              <IndividualComparison
-                view={view}
-                index={1}
-                name={name}
-                company={company}
-                jobTitle={jobTitle}
-                sexuality={sexuality}
-                age={age}
-                gender={gender}
-                race={race}
-                employeeType={employeeType}
-                yrsExperience={yrsExperience}
-                yrsCompany={yrsCompany}
-                baseSalary={baseSalary}
-                annualBonus={annualBonus}
-                stockOptions={stockOptions}
-                signingBonus={signingBonus}
-                ftStatus={ftStatus}
-                allNames={allNames}
-                allGenders={allGenders}
-                allAges={allAges}
-                allSexes={allSexes}
-                allTypes={allTypes}
-                allYrsExperience={allYrsExperience}
-                allYrsCompany={allYrsCompany}
-                allBaseSalary={allBaseSalary}
-              />
-            </Container>
+          <div>
+            <div id="tables_div">
+              <Container>
+                <CompanyComparison
+                  view={view}
+                  index={0}
+                  name={name}
+                  company={company}
+                  jobTitle={jobTitle}
+                  sexuality={sexuality}
+                  age={age}
+                  gender={gender}
+                  race={race}
+                  employeeType={employeeType}
+                  yrsExperience={yrsExperience}
+                  yrsCompany={yrsCompany}
+                  baseSalary={baseSalary}
+                  annualBonus={annualBonus}
+                  stockOptions={stockOptions}
+                  signingBonus={signingBonus}
+                  ftStatus={ftStatus}
+                  raceList={raceList}
+                  genderList={genderList}
+                  ageList={ageList}
+                  aggregateList={aggregateList}
+                  allNames={allNames}
+                />
+                <IndividualComparison
+                  view={view}
+                  index={1}
+                  name={name}
+                  company={company}
+                  jobTitle={jobTitle}
+                  sexuality={sexuality}
+                  age={age}
+                  gender={gender}
+                  race={race}
+                  employeeType={employeeType}
+                  yrsExperience={yrsExperience}
+                  yrsCompany={yrsCompany}
+                  baseSalary={baseSalary}
+                  annualBonus={annualBonus}
+                  stockOptions={stockOptions}
+                  signingBonus={signingBonus}
+                  ftStatus={ftStatus}
+                  allNames={allNames}
+                  allGenders={allGenders}
+                  allAges={allAges}
+                  allSexes={allSexes}
+                  allTypes={allTypes}
+                  allYrsExperience={allYrsExperience}
+                  allYrsCompany={allYrsCompany}
+                  allBaseSalary={allBaseSalary}
+                />
+              </Container>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </React.Fragment>
   );
 }

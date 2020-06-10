@@ -26,16 +26,32 @@ fairpayController.getUser = (req, res, next) => {
 
   let params = [currentUserId];
 
-  db.query(queryString, params, (err, response) => {
-    if (err) {
-      console.log("Error in query for user: ", err);
+  async function dbUserQuery() {
+    try {
+      const response = await db.query(queryString, params)
+      res.locals.userData = response.rows
+      next()
     }
+    catch (err) {
+      console.log("Error in query for user: ", err);
+      return next(err)
+    }
+    // finally {
+    //   console.log('user query complete!')
+    // }
+  }
+  dbUserQuery()
 
-    console.log("response in getUser", response.rows);
-    res.locals.userData = response.rows;
+  // db.query(queryString, params, (err, response) => {
+  //   if (err) {
+  //     console.log("Error in query for user: ", err);
+  //   }
 
-    next();
-  });
+  //   console.log("response in getUser", response.rows);
+  //   res.locals.userData = response.rows;
+
+  //   next();
+  // });
 };
 
 // POST /api/company/jobTitles

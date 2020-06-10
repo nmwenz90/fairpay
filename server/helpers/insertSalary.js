@@ -12,8 +12,8 @@ insertSalary.insert = (req, res, companyKey) => {
   if (!company_name) {
     res.status(418).json("Error inserting salary, request must contain company_name");
   }
-    
-// if PUT request includes salary/employment info, inserts salary table entry
+
+  // if PUT request includes salary/employment info, inserts salary table entry
   if (employee_type || years_at_company || years_of_experience ||
     base_salary || annual_bonus || stock_options ||
     signing_bonus || full_time_status || active) {
@@ -25,12 +25,27 @@ insertSalary.insert = (req, res, companyKey) => {
                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
                    RETURNING _id as key`;
     let params = [companyKey, job_title, employee_type, years_at_company, years_of_experience,
-                  base_salary, annual_bonus, stock_options, signing_bonus, full_time_status,
-                  active];
-    
-    return db.query(queryString, params)
-    .then(response =>  response.rows[0].key)
-    .catch ((err) => console.log('Error in query for creating new salary entry: ', err));
+      base_salary, annual_bonus, stock_options, signing_bonus, full_time_status,
+      active];
+
+    const salaryQuery = async () => {
+      try {
+        const query = await db.query(queryString, params)
+        const response = await query.rows[0].key
+        return response
+      }
+      catch (err) {
+        console.log('error in salaryQuery function')
+      }
+      finally {
+        console.log('salaryQuery has run')
+      }
+    }
+    salaryQuery()
+
+    // return db.query(queryString, params)
+    // .then(response =>  response.rows[0].key)
+    // .catch ((err) => console.log('Error in query for creating new salary entry: ', err));
   }
 }
 
